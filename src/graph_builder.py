@@ -11,7 +11,7 @@ def push_to_neo4j(graph):
         try:
             driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASS))
             with driver.session() as session:
-                print("✅ Connected to Neo4j. Clearing old graph.")
+                print("Connected to Neo4j. Clearing old graph.")
                 session.run("MATCH (n) DETACH DELETE n")
 
                 for node in graph.nodes:
@@ -24,11 +24,14 @@ def push_to_neo4j(graph):
                     """, u=u, v=v, latency=data.get("latency_ms", 0))
 
             driver.close()
-            print("📡 Neo4j graph updated successfully.")
-            return  # Exit after success
+            print("Neo4j graph updated successfully.")
+            return
         except Exception as e:
-            print(f"⚠️ Neo4j connection failed (attempts left: {retries - 1}): {e}")
+            print(f"Neo4j connection failed (attempts left: {retries - 1}): {e}")
             retries -= 1
             time.sleep(wait_seconds)
 
-    print("❌ Failed to connect to Neo4j after multiple attempts.")
+    def get_available_nodes():
+        return list(graph.nodes)
+
+    print("Failed to connect to Neo4j after multiple attempts.")
