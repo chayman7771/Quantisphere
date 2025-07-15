@@ -6,7 +6,7 @@ LATENCY_CSV = os.getenv("LATENCY_CSV", "data/synthetic_latencies.csv")
 
 def build_graph():
     df = pd.read_csv(LATENCY_CSV)
-    print("📄 CSV Preview:\n", df.head())
+    print("CSV Preview:\n", df.head())
 
     graph = nx.DiGraph()
 
@@ -14,23 +14,27 @@ def build_graph():
         source = row["source"]
         target = row["target"]
         latency = row["latency_ms"]
-        graph.add_edge(source, target, latency=latency)
+        graph.add_edge(source, target, latency_ms=latency) 
 
-    print("🧠 Nodes in graph:", list(graph.nodes()))
-    print("🔗 Edges in graph:", list(graph.edges(data=True)))
+    print("Nodes in graph:", list(graph.nodes()))
+    print("Edges in graph:", list(graph.edges(data=True)))
 
     return graph
 
-
 def find_optimal_path(graph, source, target):
     try:
-        path = nx.dijkstra_path(graph, source, target, weight='latency_ms')
-        latency = nx.dijkstra_path_length(graph, source, target, weight='latency_ms')
+        path = nx.shortest_path(graph, source=source, target=target, weight="latency_ms")
+
+        total_latency = sum(
+            graph[u][v]["latency_ms"] for u, v in zip(path[:-1], path[1:])
+        )
+
         return {
-            "path": " → ".join(path),
-            "latency_ms": round(latency, 2),
+            "path": path,
+            "latency_ms": round(total_latency, 2),
             "hops": len(path) - 1
         }
+
     except nx.NetworkXNoPath:
         return {
             "path": None,
