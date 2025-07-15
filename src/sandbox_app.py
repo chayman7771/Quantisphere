@@ -1,5 +1,5 @@
 import streamlit as st
-from router import find_shortest_path  # or your relevant pathfinding func
+from router import find_optimal_path  # or your relevant pathfinding func
 from graph_builder import get_available_nodes  # assumes you have this
 
 st.title("Quantisphere Routing Sandbox")
