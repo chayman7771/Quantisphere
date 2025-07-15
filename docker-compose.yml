@@ -1,12 +1,16 @@
+version: '3.9'
+
 services:
   app:
     build:
       context: .
       dockerfile: docker/Dockerfile
-    command: python src/main.py
+    command: streamlit run src/sandbox_app.py --server.port=8080 --server.address=0.0.0.0
+    ports:
+      - "8080:8080"
     volumes:
       - ./logs:/app/logs
-      - ./data:/app/data   
+      - ./data:/app/data
     depends_on:
       - neo4j
     environment:
