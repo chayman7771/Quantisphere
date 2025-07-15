@@ -3,4 +3,4 @@ neo4j
 websockets
 pandas
 networkx
-    
+streamlit>=1.35
