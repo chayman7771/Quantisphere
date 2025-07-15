@@ -13,7 +13,7 @@ destination = st.selectbox("Destination Node", nodes)
 
 if st.button("Run Path Simulation"):
     if home != destination:
-        path, latency = find_shortest_path(home, destination)
+        path, latency = find_optimal_path(home, destination)
         st.success(f"Path: {' → '.join(path)}")
         st.info(f"Total Latency: {latency} ms")
     else:
