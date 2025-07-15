@@ -1,8 +1,19 @@
 import os
 import time
+import pandas as pd
+import networkx as nx
 from neo4j import GraphDatabase
 from config import NEO4J_URI, NEO4J_USER, NEO4J_PASS
 
+# === Load CSV and build graph ===
+csv_path = os.path.join("data", "synthetic_latencies.csv")
+df = pd.read_csv(csv_path)
+
+graph = nx.DiGraph()
+for _, row in df.iterrows():
+    graph.add_edge(row["source"], row["target"], latency_ms=row["latency_ms"])
+
+# === Push to Neo4j ===
 def push_to_neo4j(graph):
     retries = 5
     wait_seconds = 5
@@ -31,7 +42,8 @@ def push_to_neo4j(graph):
             retries -= 1
             time.sleep(wait_seconds)
 
-    def get_available_nodes():
-        return list(graph.nodes)
-
     print("Failed to connect to Neo4j after multiple attempts.")
+
+# === Used by Streamlit App ===
+def get_available_nodes():
+    return list(graph.nodes)
