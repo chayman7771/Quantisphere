@@ -1,0 +1,21 @@
+source,target,path,latency_ms,hops
+D,E,D → E,3,1
+G,B,,,
+E,B,,,
+E,D,,,
+A,B,A → B,5,1
+C,F,C → D → E → F,16,3
+A,B,A → B,5,1
+A,B,A → B,5,1
+C,B,,,
+C,A,,,
+E,D,,,
+C,G,C → D → E → F → G,18,4
+E,D,,,
+B,G,B → C → D → E → F → G,22,5
+A,B,A → B,5,1
+E,C,,,
+G,C,,,
+A,C,A → B → C,9,2
+G,E,,,
+A,F,A → B → C → D → E → F,25,5

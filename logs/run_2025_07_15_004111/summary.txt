@@ -1,0 +1,4 @@
+Total Trades: 20
+Successful Routes: 10
+Average Latency: 11.3 ms
+Failed Routes: 10

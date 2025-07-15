@@ -1,0 +1,16 @@
+source,target,latency_ms
+A,B,3
+B,A,9
+B,C,4
+C,D,7
+D,E,3
+E,F,6
+F,G,2
+G,H,1
+H,F,5
+C,F,10
+A,D,12
+G,C,15
+X,Y,2
+Y,Z,1
+Z,X,4
