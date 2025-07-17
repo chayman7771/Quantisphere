@@ -27,4 +27,4 @@ def save_logs(trades, results):
         f.write(f"Average Latency: {avg_latency} ms\n")
         f.write(f"Failed Routes: {len(trades) - len(successful)}\n")
 
-    print(f"✅ Logs saved to: {run_dir}")
+    print(f"Logs saved to: {run_dir}")
