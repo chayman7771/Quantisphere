@@ -16,9 +16,9 @@ def main():
         target = trade["target"]
         try:
             path = find_optimal_path(graph, source, target)
-            print(f"✅ Trade route from {source} to {target}: {path}")
+            print(f"Trade route from {source} to {target}: {path}")
         except Exception as e:
-            print(f"❌ Could not find route from {source} to {target}: {e}")
+            print(f"Could not find route from {source} to {target}: {e}")
 
 if __name__ == "__main__":
     main()
