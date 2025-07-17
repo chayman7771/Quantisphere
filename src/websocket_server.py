@@ -18,7 +18,7 @@ async def broadcast(message):
         await asyncio.wait([ws.send(json.dumps(message)) for ws in connected])
 
 def start_websocket_server():
-    print(f"🌐 WebSocket server listening on ws://localhost:{WS_PORT}")
+    print(f"WebSocket server listening on ws://localhost:{WS_PORT}")
     asyncio.get_event_loop().run_until_complete(
         websockets.serve(echo, "0.0.0.0", WS_PORT)
     )
